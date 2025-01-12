@@ -1,21 +1,54 @@
-MIT License
+# Media Organizer by Date
 
-Copyright (c) 2025 Jason L. Barnette
+## Introduction
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+The **Media Organizer by Date** is a Python-based application designed to help users organize their photos and videos into folders based on their creation date (year and month). Users can choose to either **move** or **copy** files, with real-time progress tracking and verbose output.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+---
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+## Features
+
+- Organizes media files into `yyyy-mm` folder structures.
+- Supports all common photo and video formats.
+- Allows users to select source, destination, and error folders.
+- Real-time progress bar and verbose output in the GUI.
+- Option to move or copy files.
+- Runs as a Python script (`mediaOrganizer.py`) or compiled executable (`mediaOrganizer.exe`).
+
+---
+
+## Supported Formats
+
+- **Photos:** `.jpg`, `.jpeg`, `.png`, `.gif`, `.tiff`, `.bmp`, `.webp`
+- **Videos:** `.mp4`, `.mov`, `.avi`, `.mkv`, `.wmv`, `.flv`, `.webm`
+
+---
+
+## Installation
+
+### Prerequisites
+
+1. **Python 3.8 or Later**
+   - Download and install Python from [python.org](https://www.python.org/).
+   - Ensure you check the option **"Add Python to PATH"** during installation.
+
+2. **Required Libraries**
+   - Install dependencies by running:
+     ```bash
+     pip install pillow
+     ```
+
+### Download the Script
+
+1. Clone or download the `mediaOrganizer.py` script to your computer.
+
+---
+
+## Usage
+
+### Running the Script in CLI
+
+1. Open a terminal (Command Prompt or PowerShell).
+2. Navigate to the folder containing the script:
+   ```bash
+   cd path\to\your\script
