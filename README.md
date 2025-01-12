@@ -121,7 +121,7 @@ The **Media Organizer by Date** is a Python-based application designed to help u
 
 ### **Contributing**
 
-Contributions are welcome! Submit issues or pull requests to improve the application.
+Contributions are welcome, but I probably won't do very much with this going forward. I wrote this to help me organize thousands of old photos from an external hard drive. You're welcome to provide suggestions though.
 
 * * * * *
 
