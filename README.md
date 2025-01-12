@@ -66,7 +66,7 @@ The **Media Organizer by Date** is a Python-based application designed to help u
 
 #### **Running the Script as an EXE**
 
-1.  **Compile the Script to an Executable** (Optional):
+1.  **Compile the Script to an Executable** (This is already done, hence the exe in this GIT, but you can do it yourself if you want to):
 
     -   Install PyInstaller:
 
