@@ -1,5 +1,5 @@
 # Media Organizer by Date
-**Media Organizer by Date** is a versatile tool that helps you organize your photos and videos by sorting them into year-month, year-only folders, or dumping them into a single folder of your choice. I created this application because I needed some way to sort through decades of family photos. You're welcome to pull this code and improve on it as you wish.
+**Media Organizer by Date** is a versatile tool that helps you organize your photos and videos by sorting them into year-month, year-only folders, or dumping them into a single folder of your choice. It scans the selected source folder and all its subfolders recursively to locate photos and videos. This ensures that no media files are missed, regardless of how deeply nested they are within the directory structure. I created this application because I needed some way to sort through decades of family photos. You're welcome to pull this code and improve on it as you wish.
 
 Created by Jason L. Barnette.
 
