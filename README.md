@@ -140,7 +140,7 @@ certutil -hashfile mediaOrganizer.exe MD5
 ### Example Output
 If the checksum matches, the output will look like this:
 MD5 hash of mediaOrganizer.exe:
-<insert_md5_checksum_here>
+f680fa2277dd62d1a4344859405a10d3
 CertUtil: -hashfile command completed successfully.
 
 If the checksum does not match, download the file again or contact the developer.
