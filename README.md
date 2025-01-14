@@ -1,130 +1,185 @@
-### **Updated README**
+# Media Organizer by Date
+**Media Organizer by Date** is a versatile tool that helps you organize your photos and videos by sorting them into year-month, year-only folders, or dumping them into a single folder of your choice. I created this application because I needed some way to sort through decades of family photos. You're welcome to pull this code and improve on it as you wish.
 
-#### **Introduction**
+Created by Jason L. Barnette.
 
-The **Media Organizer by Date** is a Python-based application designed to help users organize their photos and videos into folders based on their creation date (year and month). Users can choose to either **move** or **copy** files, with real-time progress tracking and verbose output.
 
-* * * * *
+## Introduction
 
-### **Features**
+The **Media Organizer by Date** is a Python-based application designed to help users organize their photos and videos into folders based on their creation date. Users can choose between three organization modes:
+- Organize into `yyyy-mm` (year-month) folders.
+- Organize into `yyyy` (year-only) folders.
+- Dump all media files into a single destination folder.
 
--   Organizes media files into `yyyy-mm` folder structures.
--   Supports all common photo and video formats.
--   Allows users to select source, destination, and error folders.
--   Real-time progress bar and verbose output in the GUI.
--   Option to move or copy files.
--   Runs as a Python script (`mediaOrganizer.py`) or compiled executable (`mediaOrganizer.exe`).
+The application provides real-time progress tracking, verbose logging, and a user-friendly GUI. It can also run via the CLI for advanced users.
 
-* * * * *
+---
 
-### **Supported Formats**
+## Features
 
--   **Photos:** `.jpg`, `.jpeg`, `.png`, `.gif`, `.tiff`, `.bmp`, `.webp`
--   **Videos:** `.mp4`, `.mov`, `.avi`, `.mkv`, `.wmv`, `.flv`, `.webm`
+- **Multiple Organization Modes:** Choose between year-month, year-only, or a single destination folder.
+- **Move or Copy Files:** Decide whether to move files or create duplicates in the destination folder.
+- **Real-Time Progress Tracking:** Monitor progress through a GUI progress bar and logs.
+- **Support for Photos and Videos:** Works with common photo and video file formats.
+- **Run in GUI or CLI Mode:** Flexible operation for different user needs.
+- **Cross-Platform Compatibility:** Works on Windows with Python installed or as a standalone executable.
 
-* * * * *
+---
 
-### **Installation**
+## Supported Formats
 
-#### **Prerequisites**
+- **Photos:** `.jpg`, `.jpeg`, `.png`, `.gif`, `.tiff`, `.bmp`, `.webp`
+- **Videos:** `.mp4`, `.mov`, `.avi`, `.mkv`, `.wmv`, `.flv`, `.webm`
 
-1.  **Python 3.8 or Later**
+---
 
-    -   Download and install Python from [python.org](https://www.python.org/).
-    -   Ensure you check the option **"Add Python to PATH"** during installation.
-2.  **Required Libraries**
+## Installation
 
-    -   Install dependencies by running:
+### Prerequisites
 
-        pip install pillow
+1. **Python 3.8 or Later**
+   - Download and install Python from [python.org](https://www.python.org/).
+   - Ensure you check the option **"Add Python to PATH"** during installation.
 
-#### **Download the Script**
+2. **Required Libraries**
+   - Install dependencies by running:
+     ```
+     pip install pillow
+     ```
 
-1.  Clone or download the `mediaOrganizer.py` script to your computer.
+---
 
-* * * * *
+## Usage
 
-### **Usage**
+### Running in GUI Mode
 
-#### **Running the Script in CLI**
+1. Open a terminal (Command Prompt or PowerShell).
+2. Navigate to the folder containing the script:
+     ```
+     cd path\to\your\script
+     ```
+3. Launch the application:
+     ```
+     python mediaOrganizer.py
+     ```
+4. Use the GUI to:
+   - Select the **source folder** containing your media files.
+   - Select the **destination folder** where organized files will be saved.
+   - Select the **error folder** for files without valid metadata.
+   - Choose your **organization mode**:
+     - `yyyy-mm` folders.
+     - `yyyy` folders.
+     - Single folder (dump all files).
+   - Choose to **move** or **copy** files.
+   - Click **"Organize"** to start processing.
 
-1.  Open a terminal (Command Prompt or PowerShell).
-2.  Navigate to the folder containing the script:
+---
 
-    cd path\to\your\script
+### Running in CLI Mode
 
-3.  Run the script:
+1. Open a terminal (Command Prompt or PowerShell).
+2. Run the script with the required arguments:
+     ```
+     python mediaOrganizer.py <source_folder> <destination_folder> <error_folder> [--operation move|copy] [--mode sort|year|dump]
+     ```
+3. Example command:
+     ```
+     python mediaOrganizer.py "C:\Users\YourName\Pictures" "C:\Users\YourName\OrganizedMedia" "C:\Users\YourName\ErrorMedia" --operation copy --mode year
+     ```
 
-    python mediaOrganizer.py
+   - `<source_folder>`: Folder containing your media files.
+   - `<destination_folder>`: Folder where organized files will be saved.
+   - `<error_folder>`: Folder for files without valid metadata.
+   - `--operation`: Specify whether to `move` or `copy` files (default: `copy`).
+   - `--mode`: Specify the organization mode:
+     - `sort` for `yyyy-mm` folders.
+     - `year` for `yyyy` folders.
+     - `dump` for dumping all files into a single folder.
 
-4.  The GUI will open. Use it to:
-    -   Select the **source folder** containing the media files.
-    -   Select the **destination folder** where organized files will be saved.
-    -   Select the **error folder** for files without valid metadata.
-    -   Choose to **move** or **copy** files.
-    -   Click "Organize" to start processing.
+---
 
-#### **Running the Script as an EXE**
+### Compiling the Code to an Executable
 
-1.  **Compile the Script to an Executable** (or you can just download the EXE in this git, but if you really want to do it yourself):
+If you'd like to distribute or run the program without needing Python installed, you can compile it into a standalone `.exe` file. However, there is already an exe in the offial github if you wish to use that.
 
-    -   Install PyInstaller:
+1. **Install PyInstaller**:
+     ```
+     pip install pyinstaller
+     ```
 
-        pip install pyinstaller
+2. **Compile the Script**:
+     ```
+     pyinstaller --noconsole --onefile mediaOrganizer.py
+     ```
 
-    -   Compile the script:
+3. The compiled `.exe` will be located in the `dist` folder.
 
-        pyinstaller --noconsole --onefile mediaOrganizer.py
+4. Optional: Add a custom icon:
+     ```
+     pyinstaller --noconsole --onefile --icon=icon.ico mediaOrganizer.py
+     ```
 
-    -   The compiled `.exe` file will be located in the `dist` folder and will be named `mediaOrganizer.exe`.
-2.  **Run the EXE File**:
+---
 
-    -   Double-click the `mediaOrganizer.exe` file to launch the application.
-    -   Follow the GUI instructions as described above.
+## Verifying File Integrity
 
-* * * * *
+To ensure the downloaded executable file (`mediaOrganizer.exe`) is authentic and has not been tampered with, verify its MD5 checksum.
 
-### **Example Workflow**
+### MD5 Checksum
+The expected MD5 checksum for the current release is:
+f680fa2277dd62d1a4344859405a10d3
 
-1.  **Select Source Folder:** Choose `C:\Users\YourName\Pictures`.
-2.  **Select Destination Folder:** Choose `C:\Users\YourName\OrganizedMedia`.
-3.  **Select Error Folder:** Choose `C:\Users\YourName\ErrorMedia`.
-4.  **Choose Move or Copy:** Select the desired option.
-5.  **Click Organize:** Watch progress in the log and progress bar.
+### How to Verify the Checksum
+1. Download the executable file from the release.
+2. Open a terminal (Command Prompt or PowerShell on Windows).
+3. Navigate to the directory containing the `mediaOrganizer.exe` file.
+4. Run the following command:
+certutil -hashfile mediaOrganizer.exe MD5
+5. Compare the generated checksum with the one listed above. If they match, the file is intact.
 
-* * * * *
+### Example Output
+If the checksum matches, the output will look like this:
+MD5 hash of mediaOrganizer.exe:
+<insert_md5_checksum_here>
+CertUtil: -hashfile command completed successfully.
 
-### **Troubleshooting**
+If the checksum does not match, download the file again or contact the developer.
 
-1.  **Python Not Recognized in CLI**
+---
 
-    -   Ensure Python is installed and added to PATH.
-    -   Verify by running:
+### Example Workflow
 
-        python --version
+1. Select the folder containing your photos and videos.
+2. Choose a destination folder where organized files will be saved.
+3. Specify a folder to store files without metadata.
+4. Decide whether to move or copy the files.
+5. Start the organization process and monitor progress in the GUI or terminal.
 
-2.  **Missing Libraries**
+---
 
-    -   Install missing dependencies:
+### Troubleshooting
 
-        pip install pillow
+1. **Python Not Recognized**:
+   - Ensure Python is installed and added to your system’s PATH.
+   - Verify by running:
+     ```
+     python --version
+     ```
 
-3.  **Issues with EXE**
+2. **Missing Libraries**:
+   - Install missing dependencies using:
+     ```
+     pip install pillow
+     ```
 
-    -   Ensure PyInstaller is correctly installed and used.
-    -   Recompile the script if necessary.
-4.  **Files Not Organized**
+3. **Permission Issues**:
+   - Ensure you have write access to the destination and error folders.
 
-    -   Check the error folder for files without metadata.
+4. **Executable Not Working**:
+   - Verify that all required resources (e.g., `icon.ico`) are present during compilation.
 
-* * * * *
+---
 
-### **Contributing**
-
-Contributions are welcome, but I probably won't do very much with this going forward. I wrote this to help me organize thousands of old photos from an external hard drive. You're welcome to provide suggestions though.
-
-* * * * *
-
-### **License**
+## License
 
 This project is licensed under the MIT License. See the LICENSE file for more details.
