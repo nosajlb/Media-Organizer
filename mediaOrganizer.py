@@ -15,7 +15,7 @@ class MediaOrganizerApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Media Organizer by Date")
-        self.root.geometry("500x600")
+        self.root.geometry("500x700")
         self.root.resizable(False, False)
 
         # Folder paths
@@ -23,8 +23,11 @@ class MediaOrganizerApp:
         self.destination_folder = ""
         self.error_folder = ""
 
-        # Operation mode (move or copy)
-        self.operation = StringVar(value="move")
+        # Operation mode (move or copy) - Default to "copy"
+        self.operation = StringVar(value="copy")
+
+        # Organization mode (sort yyyy-mm, yyyy, or dump) - Default to "sort"
+        self.organization_mode = StringVar(value="sort")
 
         # GUI Components
         Label(root, text="Media Organizer by Date", font=("Arial", 20, "bold")).pack(pady=5)
@@ -42,8 +45,14 @@ class MediaOrganizerApp:
         self.error_label = Label(root, text="Error Folder: Not selected", fg="gray")
         self.error_label.pack()
 
-        Radiobutton(root, text="Move Files", variable=self.operation, value="move").pack()
+        Label(root, text="Select Organization Mode:").pack(pady=5)
+        Radiobutton(root, text="Sort into yyyy-mm folders", variable=self.organization_mode, value="sort").pack()
+        Radiobutton(root, text="Sort into yyyy folders", variable=self.organization_mode, value="year").pack()
+        Radiobutton(root, text="Dump all into a single folder", variable=self.organization_mode, value="dump").pack()
+
+        # Operation mode: Default to "copy"
         Radiobutton(root, text="Copy Files", variable=self.operation, value="copy").pack()
+        Radiobutton(root, text="Move Files", variable=self.operation, value="move").pack()
 
         Button(root, text="Organize", command=self.organize_files).pack(pady=10)
 
@@ -92,13 +101,13 @@ class MediaOrganizerApp:
             return
 
         operation_type = self.operation.get()
-        self.log_message(f"Starting organization ({operation_type})...")
-        self.run_organizer(self.source_folder, self.destination_folder, self.error_folder, operation_type)
-        self.log_message("Photo organization complete!")
+        organization_mode = self.organization_mode.get()
+        self.log_message(f"Starting organization ({operation_type}, mode: {organization_mode})...")
+        self.run_organizer(self.source_folder, self.destination_folder, self.error_folder, operation_type, organization_mode)
+        self.log_message("Media organization complete!")
         messagebox.showinfo("Success", "Media organization complete!")
 
-    def run_organizer(self, source_dir, dest_dir, error_dir, operation):
-        # Calculate total files for progress bar
+    def run_organizer(self, source_dir, dest_dir, error_dir, operation, organization_mode):
         total_files = sum(len(files) for _, _, files in os.walk(source_dir))
         processed_files = 0
         self.progress["maximum"] = total_files
@@ -111,35 +120,36 @@ class MediaOrganizerApp:
                     continue
 
                 try:
-                    year, month = self.get_file_date(filepath)
+                    if organization_mode == "sort":
+                        year, month = self.get_file_date(filepath)
+                        if year and month:
+                            folder_name = f"{year}-{month}"
+                            target_folder = os.path.join(dest_dir, folder_name)
+                        else:
+                            target_folder = error_dir
+                    elif organization_mode == "year":
+                        year, _ = self.get_file_date(filepath)
+                        if year:
+                            folder_name = f"{year}"
+                            target_folder = os.path.join(dest_dir, folder_name)
+                        else:
+                            target_folder = error_dir
+                    else:  # Dump all into a single folder
+                        target_folder = dest_dir
 
-                    if year and month:
-                        folder_name = f"{year}-{month}"
-                        target_folder = os.path.join(dest_dir, folder_name)
-                        os.makedirs(target_folder, exist_ok=True)
-                        unique_filename = self.create_unique_filename(target_folder, filename)
-                        new_path = os.path.join(target_folder, unique_filename)
+                    os.makedirs(target_folder, exist_ok=True)
+                    unique_filename = self.create_unique_filename(target_folder, filename)
+                    new_path = os.path.join(target_folder, unique_filename)
 
-                        if operation == "move":
-                            os.rename(filepath, new_path)
-                        elif operation == "copy":
-                            shutil.copy2(filepath, new_path)
+                    if operation == "move":
+                        os.rename(filepath, new_path)
+                    elif operation == "copy":
+                        shutil.copy2(filepath, new_path)
 
-                        self.log_message(f"{operation.capitalize()}d: {filename} -> {new_path}")
-                    else:
-                        os.makedirs(error_dir, exist_ok=True)
-                        unique_filename = self.create_unique_filename(error_dir, filename)
-                        new_path = os.path.join(error_dir, unique_filename)
-                        if operation == "move":
-                            os.rename(filepath, new_path)
-                        elif operation == "copy":
-                            shutil.copy2(filepath, new_path)
-
-                        self.log_message(f"No date found: {filename} -> {error_dir}")
+                    self.log_message(f"{operation.capitalize()}d: {filename} -> {new_path}")
                 except Exception as e:
                     self.log_message(f"Error processing {filename}: {e}")
 
-                # Update progress bar
                 processed_files += 1
                 self.progress["value"] = processed_files
                 self.root.update()
