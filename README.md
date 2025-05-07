@@ -100,7 +100,7 @@ The application provides real-time progress tracking, verbose logging, and a use
 
 ### Compiling the Code to an Executable
 
-If you'd like to distribute or run the program without needing Python installed, you can compile it into a standalone `.exe` file. However, there is already an exe in the offial github if you wish to use that.
+If you'd like to distribute or run the program without needing Python installed, you can compile it into a standalone `.exe` file. However, there is already an exe in the official github if you wish to use that.
 
 1. **Install PyInstaller**:
      ```
